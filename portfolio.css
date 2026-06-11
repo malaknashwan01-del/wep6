@@ -1,0 +1,466 @@
+/* ============================================
+   portfolio.css — Animated Portfolio
+   Al-Aqsa University | Web Development 1
+   ============================================ */
+
+/* ─── TODO 1: CSS Variables ─── */
+:root {
+    --primary: #4caf50;
+    --primary-glow: rgba(76, 175, 80, 0.25);
+    --bg-dark: #0f0f1a;
+    --bg-card: #1a1a2e;
+    --bg-card-hover: #1f1f38;
+    --text: #e0e0e0;
+    --text-muted: #888aaa;
+    --radius: 12px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    background-color: var(--bg-dark);
+    color: var(--text);
+    line-height: 1.6;
+}
+
+/* ─── TODO 2: Navbar with Transition + Underline Effect ─── */
+nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background-color: rgba(15, 15, 26, 0.85);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    padding: 16px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 999;
+    border-bottom: 1px solid rgba(76, 175, 80, 0.1);
+}
+
+nav .logo {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary);
+    letter-spacing: 1px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 32px;
+}
+
+.nav-link {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    position: relative;
+    padding-bottom: 4px;
+    transition: color 0.3s ease;
+}
+
+.nav-link::after {
+    content: "";
+    display: block;
+    height: 2px;
+    background: var(--primary);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s ease;
+    border-radius: 2px;
+}
+
+.nav-link:hover {
+    color: var(--primary);
+}
+
+.nav-link:hover::after {
+    transform: scaleX(1);
+}
+
+/* ─── TODO 3: Hero with fadeInUp Animation ─── */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+#hero-section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 100px 20px 60px;
+    position: relative;
+    overflow: hidden;
+}
+
+#hero-section::before {
+    content: '';
+    position: absolute;
+    width: 500px;
+    height: 500px;
+    background: radial-gradient(circle, rgba(76, 175, 80, 0.08) 0%, transparent 70%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+}
+
+.hero-label {
+    font-size: 14px;
+    color: var(--primary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    animation: fadeInUp 0.6s ease both;
+    animation-delay: 0.1s;
+}
+
+.hero-title {
+    font-size: 58px;
+    font-weight: 800;
+    color: #ffffff;
+    letter-spacing: -1.5px;
+    line-height: 1.1;
+    margin: 12px 0;
+    animation: fadeInUp 0.6s ease both;
+    animation-delay: 0.25s;
+}
+
+.hero-title span {
+    color: var(--primary);
+}
+
+.hero-subtitle {
+    font-size: 20px;
+    color: var(--text-muted);
+    margin-bottom: 12px;
+    animation: fadeInUp 0.6s ease both;
+    animation-delay: 0.4s;
+}
+
+.hero-desc {
+    max-width: 500px;
+    margin: 0 auto 32px;
+    color: var(--text-muted);
+    font-size: 15px;
+    animation: fadeInUp 0.6s ease both;
+    animation-delay: 0.55s;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    animation: fadeInUp 0.6s ease both;
+    animation-delay: 0.7s;
+}
+
+.btn-primary {
+    padding: 12px 28px;
+    background: var(--primary);
+    color: #0f0f1a;
+    border: none;
+    border-radius: var(--radius);
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-primary:hover {
+    background: #66bb6a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px var(--primary-glow);
+}
+
+.btn-outline {
+    padding: 12px 28px;
+    background: transparent;
+    color: var(--primary);
+    border: 1.5px solid var(--primary);
+    border-radius: var(--radius);
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-outline:hover {
+    transform: translateY(-2px);
+}
+
+/* ─── SECTION SHARED ─── */
+section {
+    padding: 80px 60px;
+}
+
+section h2 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #fff;
+
+    letter-spacing: -0.5px;
+    margin-bottom: 8px;
+}
+
+.section-sub {
+    color: var(--text-muted);
+    font-size: 15px;
+    margin-bottom: 40px;
+}
+
+/* ─── TODO 4: Skill Cards with Scale on Hover ─── */
+#skills-section {
+    background-color: #13131f;
+    animation: fadeInUp 0.8s ease-out 0.2s both;
+}
+
+.skills-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-top: 8px;
+}
+
+.skill-card {
+    background: var(--bg-card);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: var(--radius);
+    padding: 28px 24px;
+    text-align: center;
+    transition: var(--transition);
+    cursor: default;
+}
+
+.skill-card .skill-icon {
+    font-size: 36px;
+    margin-bottom: 14px;
+    display: block;
+}
+
+.skill-card h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.skill-card p {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+.skill-card:hover {
+    transform: scale(1.05);
+    background: var(--bg-card-hover);
+    box-shadow: 0 8px 32px var(--primary-glow);
+    border-color: rgba(76, 175, 80, 0.3);
+}
+
+/* ─── TODO 5: Project Cards with Image Overlay ─── */
+#projects-section {
+    animation: fadeInUp 0.8s ease-out 0.4s both;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 8px;
+}
+
+.project-card {
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    transition: var(--transition);
+    position: relative;
+}
+
+.project-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4);
+    border-color: rgba(76, 175, 80, 0.2);
+}
+
+.project-img-wrapper {
+    position: relative;
+    overflow: hidden;
+}
+
+.project-img-wrapper img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+}
+
+.project-card:hover .project-img-wrapper img {
+    transform: scale(1.07);
+}
+
+.project-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(15, 15, 26, 0.82);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+
+.project-card:hover .project-overlay {
+    opacity: 1;
+}
+
+.project-overlay h3 {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.project-overlay a {
+    padding: 9px 24px;
+    background: var(--primary);
+    color: #0f0f1a;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 13px;
+    transition: background 0.25s ease;
+}
+
+.project-overlay a:hover {
+    background: #66bb6a;
+}
+
+.project-info {
+    padding: 18px 20px;
+}
+
+.project-info h3 {
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 6px;
+}
+
+.project-info p {
+    color: var(--text-muted);
+    font-size: 13px;
+}
+
+/* ─── TODO 6: Scroll-triggered (CSS-only) Animations ─── */
+#contact-section {
+    text-align: center;
+    background: #13131f;
+    animation: fadeInUp 0.8s ease-out 0.6s both;
+}
+
+.contact-links {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+
+    flex-wrap: wrap;
+    margin-top: 12px;
+}
+
+.contact-links a {
+    padding: 11px 26px;
+    border: 1.5px solid rgba(76, 175, 80, 0.4);
+
+    border-radius: var(--radius);
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 500;
+    transition: var(--transition);
+
+}
+
+.contact-links a:hover {
+
+    border-color: var(--primary);
+    color: var(--primary);
+
+    background: var(--primary-glow);
+
+    transform: translateY(-2px);
+}
+
+/* ─── FOOTER ─── */
+footer {text-align: center;
+    padding: 20px;
+
+    background: var(--bg-dark);
+    color: var(--text-muted);
+    font-size: 13px;
+
+    border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 768px) {
+    nav {
+
+        padding: 14px 20px;
+    }
+
+    nav ul {
+
+        gap: 18px;
+    }
+
+
+    .hero-title {
+        font-size: 38px;
+    }
+
+    section {
+
+        padding: 60px 20px;
+    }
+
+
+    .skills-grid,
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation: none !important;
+        transition: none !important;
+    }
+}
